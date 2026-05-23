@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Princess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffd9ea;
+      --bg-2: #ffc3de;
+      --pink: #ff4f9a;
+      --pink-dark: #d92f76;
+      --rose: #ff7db8;
+      --white: #fff8fc;
+      --text: #5b2141;
+      --gold: #ffd36e;
+      --shadow: 0 20px 60px rgba(184, 49, 118, 0.18);
+      --glass: rgba(255, 255, 255, 0.35);
+      --border: rgba(255, 255, 255, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.6), transparent 18%),
+        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.45), transparent 16%),
+        radial-gradient(circle at 50% 85%, rgba(255, 255, 255, 0.35), transparent 18%),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .floating-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -140px;
+      width: 60px;
+      height: 78px;
+      border-radius: 50% 50% 45% 45%;
+      opacity: 0.9;
+      animation: floatUp linear infinite;
+      box-shadow: inset -8px -10px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .balloon::before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 90px;
+      background: rgba(120, 70, 90, 0.35);
+      left: 50%;
+      transform: translateX(-50%);
+      top: 76px;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 10px;
+      background: inherit;
+      left: 50%;
+      bottom: -3px;
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-130vh) rotate(8deg);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    .intro {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 40px 0;
+    }
+
+    .intro-box {
+      width: min(760px, 100%);
+      background: var(--glass);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      padding: clamp(28px, 5vw, 56px);
+      animation: fadeUp 1s ease both;
+      position: relative;
+      overflow: visible;
+    }
+
+    .eyebrow {
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--pink-dark);
+      margin-bottom: 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .intro h1 {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      color: var(--pink-dark);
+      margin-bottom: 14px;
+    }
+
+    .intro p {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 560px;
+      margin: 0 auto 28px;
+      color: #6c3151;
+    }
+
+    .choice {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 8px;
+      position: relative;
+      min-height: 90px;
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 16px 28px;
+      font-size: 1rem;
+      transition: 0.25s ease;
+      box-shadow: 0 12px 30px rgba(217, 47, 118, 0.18);
+      position: relative;
+      z-index: 10;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, var(--pink), #ff89be);
+      color: white;
+    }
+
+    .btn-yes:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 16px 36px rgba(217, 47, 118, 0.28);
+    }
+
+    .btn-no {
+      background: white;
+      color: var(--pink-dark);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: left 0.3s ease, top 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-no:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .main-content {
+      opacity: 0;
+      transform: translateY(40px);
+      pointer-events: none;
+      transition: 1s ease;
+      padding-bottom: 80px;
+    }
+
+    .main-content.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Gift box overlay styles */
+    .gift-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 50;
+      padding: 20px;
+    }
+
+    .gift-wrap {
+      position: relative;
+      width: 160px;
+      height: 140px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      transition: transform 0.35s ease;
+      transform-origin: center bottom;
+      outline: none;
+    }
+
+    .box {
+      width: 140px;
+      height: 90px;
+      background: linear-gradient(180deg, #ffd36e, #ffb3d7);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 2;
+      border-top: 4px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .lid {
+      position: absolute;
+      top: -18px;
+      width: 170px;
+      height: 36px;
+      background: linear-gradient(180deg, #ff4f9a, #d92f76);
+      border-radius: 10px;
+      z-index: 4;
+      transform-origin: center bottom;
+      transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+      box-shadow: 0 10px 20px rgba(217, 47, 118, 0.18);
+    }
+
+    .ribbon {
+      position: absolute;
+      top: 18px;
+      width: 28px;
+      height: 110px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      border-radius: 6px;
+      mix-blend-mode: overlay;
+    }
+
+    .gift-open .lid {
+      transform: rotateX(-70deg) translateY(-6px);
+    }
+
+    .gift-open .gift-wrap {
+      transform: scale(1.03);
+    }
+
+    .gift-balloons {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18%;
+      width: 80%;
+      max-width: 900px;
+      height: 60vh;
+      pointer-events: none;
+      z-index: 49;
+      overflow: visible;
+    }
+
+    .gift-balloons .balloon {
+      position: absolute;
+      bottom: 0;
+      width: 48px;
+      height: 62px;
+      border-radius: 50% 50% 45% 45%;
+      box-shadow: inset -6px -8px 12px rgba(0, 0, 0, 0.08);
+      animation: rise var(--dur) linear forwards;
+      opacity: 0.98;
+    }
+
+    .gift-balloons .balloon::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 84px;
+      background: rgba(100, 40, 60, 0.18);
+      bottom: -78px;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.9);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .wish-note {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 600;
+      color: var(--pink-dark);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      z-index: 60;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      text-align: center;
+    }
+
+    .wish-show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-bg" id="floatingBg" aria-hidden="true"></div>
+
+  <div class="page">
+    <section class="intro" id="intro">
+      <div class="container">
+        <div class="intro-box">
+          <div class="eyebrow">Special Surprise</div>
+          <h1>Are you ready?</h1>
+          <img src="https://github.com/mahitariq-2/happy-birthday-dear-pookie/raw/main/birthday_wishes_for_best_friend_by_hatemzz_dg4srje-fullview.jpg" alt="Birthday surprise" style="max-width:100%; border-radius:16px; margin:20px 0;" />
+          <p>
+            Mere paas aap ke liye ek pyara sa birthday surprise hai...
+            lekin aagay tabhi chalega jab aap <strong>Yes</strong> par click karein ✨
+          </p>
+
+          <div class="choice" id="choiceContainer">
+            <button class="btn btn-yes" id="yesBtn">Yes, I'm Ready 💖</button>
+            <button class="btn btn-no" id="noBtn">No 🙈</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gift overlay (hidden initially) -->
+    <div id="giftOverlay" class="gift-overlay hidden" aria-hidden="true">
+      <div class="gift-wrap" id="giftWrap" role="button" tabindex="0" aria-label="Open gift">
+        <div class="ribbon" aria-hidden="true"></div>
+        <div class="lid" aria-hidden="true"></div>
+        <div class="box" aria-hidden="true"></div>
+      </div>
+
+      <div id="giftBalloons" class="gift-balloons" aria-hidden="true"></div>
+
+      <div id="wishNote" class="wish-note" aria-hidden="true">🎉 Happy 17th Birthday, Princess! 🎉</div>
+
+      <button id="openGiftBtn" class="btn btn-yes" style="margin-top: 6px;">Open Gift 🎁</button>
+    </div>
+
+    <main class="main-content" id="mainContent" aria-hidden="true">
+      <div class="container">
+        <h2 style="font-family: 'Great Vibes', cursive; color: var(--pink-dark); margin-bottom: 10px;">Sweet Wishes</h2>
+        <p style="max-width: 720px; color: #6c3151;">
+          may allah bless you shazadi allah pka apko hamysha khush rakhhy ameen.
+          <img src="https://github.com/mahitariq-2/hy-sweetheart/blob/main/WhatsApp%20Image%202026-05-05%20at%206.00.03%20AM.jpeg" alt="My Birthday Image" style="max-width:100%; border-radius:16px; margin:20px 0;" />
+
+        </p>
+
+        <section style="margin-top: 24px; display: grid; gap: 12px;">
+          <div style="background: rgba(255, 255, 255, 0.7); border-radius: 12px; padding: 16px;">آپ کی مسکراہٹ ہمیشہ برقرار رہے ❤️</div>
+          <div style="background: rgba(255, 255, 255, 0.7); border-radius: 12px; padding: 16px;">خوشیوں بھرا سال آپ کی راہ دیکھ رہا ہے 🎈</div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const intro = document.getElementById('intro');
+    const mainContent = document.getElementById('mainContent');
+    const floatingBg = document.getElementById('floatingBg');
+    const choiceContainer = document.getElementById('choiceContainer');
+
+    const giftOverlay = document.getElementById('giftOverlay');
+    const giftWrap = document.getElementById('giftWrap');
+    const openGiftBtn = document.getElementById('openGiftBtn');
+    const giftBalloons = document.getElementById('giftBalloons');
+    const wishNoteEl = document.getElementById('wishNote');
+
+    // Create floating background balloons
+    function createBalloon(container, className = 'balloon') {
+      const b = document.createElement('span');
+      b.className = className;
+      const colors = ['#ff6cab', '#ff8cc2', '#ffb3d7', '#ffd36e', '#ffa1cb', '#ff4f9a'];
+      b.style.left = Math.random() * 100 + '%';
+      b.style.background = colors[Math.floor(Math.random() * colors.length)];
+      b.style.animationDuration = 10 + Math.random() * 8 + 's';
+      b.style.animationDelay = Math.random() * 6 + 's';
+      b.style.transform = `scale(${0.8 + Math.random() * 0.8})`;
+      container.appendChild(b);
+    }
+
+    for (let i = 0; i < 16; i++) createBalloon(floatingBg, 'balloon');
+
+    // Move "No" button smoothly within container on hover and click
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', moveNoButton);
+
+    function moveNoButton() {
+      const parentRect = choiceContainer.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxLeft = parentRect.width - btnRect.width;
+      const maxTop = parentRect.height - btnRect.height;
+
+      const left = Math.random() * maxLeft;
+      const top = Math.random() * maxTop;
+
+      noBtn.style.left = left + 'px';
+      noBtn.style.top = top + 'px';
+    }
+
+    // When Yes clicked, hide intro and show gift overlay
+    yesBtn.addEventListener('click', () => {
+      intro.classList.add('hidden');
+      giftOverlay.classList.remove('hidden');
+      giftOverlay.setAttribute('aria-hidden', 'false');
+      giftWrap.animate([{ transform: 'translateY(20px) scale(0.98)' }, { transform: 'translateY(0) scale(1)' }], { duration: 450, easing: 'ease-out' });
+    });
+
+    // Spawn balloons for gift opening
+    function spawnGiftBalloons(count = 20) {
+      const colors = ['#ff6cab', '#ff8cc2', '#ffb3d7', '#ffd36e', '#ffa1cb', '#ff4f9a', '#8fd3ff', '#b8ffda'];
+      giftBalloons.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const b = document.createElement('span');
+        b.className = 'balloon';
+        const left = Math.random() * 100;
+        b.style.left = left + '%';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        b.style.background = `radial-gradient(circle at 30% 25%, rgba(255,255,255,0.7), ${color})`;
+        const dur = 7 + Math.random() * 6;
+        b.style.setProperty('--dur', dur + 's');
+        const scale = 0.8 + Math.random() * 0.9;
+        b.style.transform = `scale(${scale})`;
+        b.style.animationDelay = i * 0.08 + 's';
+        giftBalloons.appendChild(b);
+      }
+    }
+
+    // Open gift box animation and show balloons + wish
+    function openGift() {
+      if (giftWrap.classList.contains('gift-open')) return;
+      giftWrap.classList.add('gift-open');
+      spawnGiftBalloons(20);
+      setTimeout(() => {
+        wishNoteEl.classList.add('wish-show');
+        wishNoteEl.setAttribute('aria-hidden', 'false');
+      }, 600);
+
+      setTimeout(() => {
+        giftOverlay.classList.add('hidden');
+        giftOverlay.setAttribute('aria-hidden', 'true');
+        mainContent.classList.add('show');
+        mainContent.setAttribute('aria-hidden', 'false');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 5200);
+    }
+
+    openGiftBtn.addEventListener('click', openGift);
+    giftWrap.addEventListener('click', openGift);
+    giftWrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') openGift();
+    });
+  </script>
+</body>
+</html>
